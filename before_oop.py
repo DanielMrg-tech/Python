@@ -44,6 +44,15 @@ def update_status(title, new_status):
     else:
         print("Statusul '{}' not valid ".format(new_status))
 
+def remove_task(title):
+    # remove taks from our db
+    for task in tasks:
+        if task["title"] == title:
+#             found task Now delete from db
+            tasks.remove(task)
+            print("Taks '{}' has beed deleted".format(title))
+
+
 def print_tasks():
     for task in tasks:
         print(task)
@@ -55,5 +64,5 @@ add_task("Workout", "Looking ", "done")
 
 update_status("Dishes", "not done")
 update_status("Play", "done")
-
+remove_task("Dishes")
 print_tasks()
