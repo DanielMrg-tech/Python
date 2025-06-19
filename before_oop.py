@@ -14,6 +14,7 @@ def add_task(title, description, status):
     for t in tasks:
         if t["title"] == title:
     #         we have a duplicate task, stop the function
+            print("Duplicate tasks ! '{}'".format(title))
             return
     # check for duplicate task title
     task = {
@@ -27,13 +28,21 @@ def add_task(title, description, status):
 
 def update_status(title, new_status):
     if new_status in valid_statuses:
+
+        # only show "Updated task!" if a task has actually beed updated, and not if we are given an invalid title
+        has_been_updated = False
+
         for t in tasks:
             if t["title"] == title:
                 t["status"] = new_status
-
+                has_been_updated = True
+        if has_been_updated:
+            print("Updated task!")
+        else:
+            print("Task '{}' not found".format(title))
         print("Update task")
     else:
-        print("Statusul {} not valid ".format(new_status))
+        print("Statusul '{}' not valid ".format(new_status))
 
 def print_tasks():
     for task in tasks:
@@ -46,4 +55,5 @@ add_task("Workout", "Looking ", "done")
 
 update_status("Dishes", "not done")
 update_status("Play", "done")
+
 print_tasks()
