@@ -1,7 +1,7 @@
 # implement to do list
 tasks = []
 
-valid_statuses = {"pending", "in progress", "done"}
+valid_statuses = {"pending", "in_progress", "done"}
 
 # task = {
 #     "title": "Pickles",
@@ -53,6 +53,19 @@ def remove_task(title):
             print("Taks '{}' has beed deleted".format(title))
 
 
+def list_tasks_by_status(status):
+    # return all tasks that have the given status
+    if status in valid_statuses:
+        filtered_tasks = list(filter(lambda t: t["status"] == status, tasks))
+        return filtered_tasks
+
+    else:
+        print("Statusul '{}' invalid!".format(status))
+        return []
+        # filtered_taks = []
+        # for task in tasks:
+        #     if task["status"] == status:
+        #         filtered_taks.append(task)
 def print_tasks():
     for task in tasks:
         print(task)
@@ -61,8 +74,11 @@ add_task("Pickles", "Buy cucumbers and salt, and mustard seeds", "in_progress")
 add_task("Dishes", "Wash the dishes", "in_progress")
 add_task("Workout", "Go to the gym", "done")
 add_task("Workout", "Looking ", "done")
+add_task("School", "Both ", "in_progress")
+add_task("Life", "Get married ", "pending")
+add_task("Workout", "Looking ", "done")
 
 update_status("Dishes", "not done")
 update_status("Play", "done")
 remove_task("Dishes")
-print_tasks()
+print(list_tasks_by_status("in_progress"))
